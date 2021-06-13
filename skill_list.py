@@ -55,7 +55,6 @@ ALL_SKILLS = {
 "LEADERSHIP"   : "Leadership",
 #workshop skill :)
 "CRAFTY"   : "Crafty",
-#CRAFTY = 0
 ##just an idea for dwarfs
 #RUNES = 0
 "FAMOUS"   : "Recognition",
