@@ -59,8 +59,13 @@ class IHero ():
             self.skills[skill] = 1
 
     def add_class_skill(self, *args, **kwargs):
-        skill = self.heroclass.get_1_skill()
-        self.add_skill(skill)
+        #forcing magic skill to magic class(es)
+        if isinstance(self.heroclass, (heroclass_list.AcolyteHeroClass)) and \
+           "M_MAGIC" not in self.skills:
+                self.add_skill("M_MAGIC", "Force")
+        else: 
+            skill = self.heroclass.get_1_skill()
+            self.add_skill(skill)
 
     def add_race_skill(self, *args, **kwargs):
         race_skill = skill_list.get_race_skill(self.race)              
@@ -75,7 +80,9 @@ class IHero ():
     def add_level_to_skill(self):
         skill = random.sample(self.skills.keys(), 1)
         self.add_skill(*skill)
-
+    
+    def get_starting_weapon(self):
+        weapons_model.get_starting_weapon(self.race, self.heroclass, self.skills)    
 
 class Human (IHero):
 
@@ -86,9 +93,11 @@ class Human (IHero):
         self.character = self.randomize_character()
         self.skills = {}
         self.active_abilities = []
+        self.items = []
         self.name = name_list.make_name(self.race)
         self.randomize_starting_stats()
         self.add_class_skill()
+        self.get_starting_weapon()
 
 class Elf (IHero):
 
@@ -100,9 +109,11 @@ class Elf (IHero):
         self.character = self.randomize_character()
         self.skills = {}
         self.active_abilities = []
+        self.items = []
         self.name = name_list.make_name(self.race)
         self.randomize_starting_stats()
         self.add_class_skill()
+        self.get_starting_weapon()
 
 class Dwarf (IHero):
 
@@ -114,9 +125,11 @@ class Dwarf (IHero):
         self.character = self.randomize_character()
         self.skills = {}
         self.active_abilities = []
+        self.items = []
         self.name = name_list.make_name(self.race)
         self.randomize_starting_stats()
         self.add_class_skill()
+        self.get_starting_weapon()
 
 class Hobbit (IHero):
 
@@ -128,9 +141,11 @@ class Hobbit (IHero):
         self.character = self.randomize_character()
         self.skills = {}
         self.active_abilities = []
+        self.items = []
         self.name = name_list.make_name(self.race)
         self.randomize_starting_stats()
         self.add_class_skill()
+        self.get_starting_weapon()
 
 class HeroFactory():
 

@@ -1,5 +1,23 @@
 from  random import randint
 
+
+def get_starting_weapon(_race, _heroclass, _skills):
+    #v=list(_skills.values())
+    #k=list(_skills.keys())
+    #the_skills = k[v.index(max(v))]
+    #print(the_skills)
+##we need more than one skill!
+    result = []
+    skill_list = (list(_skills.items())) 
+    #print(list(_skills.items())) 
+
+#get_starting_weapon("a","b", {"a":4,  "d":17, "b":17, "fd":4})
+
+    # we need to add list of skill with weapons
+
+
+
+
 class Weapon:
     def __str__(self):
         print(self.name, str(self.min_dmg),"-",str(self.max_dmg),"  ", str(self.accuracy), "% ", str(self.critical),"% ","w:", str(self.weight))    
