@@ -1,4 +1,4 @@
-# based on the big 5 from experimentall psychology +evel/good
+# based on the big 5 from experimentall psychology +evil/good +race relations
 
 def get_race_character(race):
     if race == "human":
@@ -16,9 +16,11 @@ def trim_traits(full_list):
     opposite_traits = (
         ("Nervous","Resilient"),
         ("Outgoing","Solitary"),
-        ("Friendly","Stubborn"),
+        ("Agreeable","Stubborn"),
         ("Organized","Lazy"),
-        ("Good","Evil"))                      
+        ("Good","Evil"),
+        ("High IQ","Low IQ"),
+    )                      
     for pair in opposite_traits:
         if pair[0] in full_list and pair[1] in full_list:
             full_list.remove(pair[0])
@@ -34,10 +36,12 @@ CHARACTER_HUMAN = {
     "Simpleton": 5,
     "Outgoing":  5,
     "Solitary":  5,
-    "Friendly":  5,
+    "Agreeable": 5,
     "Stubborn":  5,
     "Organized": 5,
     "Lazy":      5,
+    "High IQ"  : 4,
+    "Low IQ"   : 4,     
     "Good":      5,
     "Evil":      5,
     "Human hater":  1,
@@ -53,10 +57,12 @@ CHARACTER_ELF = {
     "Simpleton": 1,
     "Outgoing":  3,
     "Solitary":  2,
-    "Friendly":  5,
+    "Agreeable": 5,
     "Stubborn":  1,
     "Organized": 5,
     "Lazy":      4,
+    "High IQ"  : 3,
+    "Low IQ"   : 2,     
     "Good":      5,
     "Evil":      1,    
     "Human hater":  3,
@@ -72,10 +78,12 @@ CHARACTER_DWARF = {
     "Simpleton": 5,
     "Outgoing":  5,
     "Solitary":  1,
-    "Friendly":  1,
+    "Agreeable": 1,
     "Stubborn":  5,
     "Organized": 2,
     "Lazy":      5,
+    "High IQ"  : 2,
+    "Low IQ"   : 3,     
     "Good":      1,
     "Evil":      5,
     "Human hater":  1,
@@ -91,10 +99,12 @@ CHARACTER_HOBBIT = {
     "Simpleton": 3,
     "Outgoing":  2,
     "Solitary":  6,
-    "Friendly":  6,
+    "Agreeable": 6,
     "Stubborn":  3,
     "Organized": 4,
     "Lazy":      4,
+    "High IQ"  : 2,
+    "Low IQ"   : 2,     
     "Good":      4,
     "Evil":      4,
     "Human hater":  1,
