@@ -68,6 +68,14 @@ ALL_SKILLS = {
 #SUMMONS = 0
 }
 
+WEAPON_SKILLS = (
+"W_POLEARMS",
+"W_CLASSIC" ,
+"W_SMALL"   ,
+"W_BOW"     ,
+"W_SPECIAL" ,
+"M_MAGIC"
+)
 
 SKILLS_HUMAN = {
 "RES_GEN"     : 10,

@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractclassmethod
 from collections import Counter
 import random
-import skill_list, character_list, heroclass_list, name_list
+import skill_list, character_list, heroclass_list, name_list, weapons_model
 
 #https://refactoring.guru/design-patterns/builder
 
@@ -97,7 +97,7 @@ class Human (IHero):
         self.name = name_list.make_name(self.race)
         self.randomize_starting_stats()
         self.add_class_skill()
-        self.get_starting_weapon()
+        self.items = self.get_starting_weapon()
 
 class Elf (IHero):
 

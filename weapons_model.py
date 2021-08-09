@@ -1,27 +1,11 @@
-from  random import randint
-
-
-def get_starting_weapon(_race, _heroclass, _skills):
-    #v=list(_skills.values())
-    #k=list(_skills.keys())
-    #the_skills = k[v.index(max(v))]
-    #print(the_skills)
-##we need more than one skill!
-    result = []
-    skill_list = (list(_skills.items())) 
-    #print(list(_skills.items())) 
-
-#get_starting_weapon("a","b", {"a":4,  "d":17, "b":17, "fd":4})
-
-    # we need to add list of skill with weapons
-
+from  random import randint, choice
+import skill_list
 
 
 
 class Weapon:
     def __str__(self):
         print(self.name, str(self.min_dmg),"-",str(self.max_dmg),"  ", str(self.accuracy), "% ", str(self.critical),"% ","w:", str(self.weight))    
-    pass
 
 
 class Sword(Weapon):
@@ -61,7 +45,10 @@ class Sword(Weapon):
                 self.weight += 1
                 self.min_dmg += 1
                 self.max_dmg += 2
-
+        
+    def __str__(self):
+        print(self.name, str(self.min_dmg),"-",str(self.max_dmg),"  ", str(self.accuracy), "% ", str(self.critical),"% ","w:", str(self.weight))
+        
 class Axe(Weapon):
     def __init__(self, weapon_level):
         self.w_type = "W_CLASSIC" 
@@ -106,7 +93,7 @@ class TwoHandedSword(Weapon):
         self.w_type = "W_POLEARMS" 
         self.w_subtype = "sword"
         self.weapon_level = weapon_level
-        self.name =("Two-handed sword lvl."+ str(weapon_level))
+        self.name = ("Two-handed sword lvl."+ str(weapon_level))
         self.min_dmg = 20
         self.max_dmg = 55
         self.accuracy = 50
@@ -332,40 +319,96 @@ class Wand(Weapon):
         print(self.name, str(self.min_dmg),"-",str(self.max_dmg),"do magic")   
         
         
-x3 = Sword(5)
-x4 = Sword(15)
-x3.__str__()
-x4.__str__()
+#x3 = Sword(5)
+#x4 = Sword(15)
+#x3.__str__()
+#x4.__str__()
 
-x1 = Axe(5)
-x2 = Axe(15)
-x1.__str__()
-x2.__str__()
+#x1 = Axe(5)
+#x2 = Axe(15)
+#x1.__str__()
+#x2.__str__()
 
-x5 = Dagger(5)
-x6 = Dagger(15)
-x5.__str__()
-x6.__str__()
+#x5 = Dagger(5)
+#x6 = Dagger(15)
+#x5.__str__()
+#x6.__str__()
 
-x7 = Bow(5)
-x8 = Bow(15)
-x7.__str__()
-x8.__str__()
+#x7 = Bow(5)
+#x8 = Bow(15)
+#x7.__str__()
+#x8.__str__()
 
-x9 = Spear(5)
-x10 = Spear(15)
-x9.__str__()
-x10.__str__()
+#x9 = Spear(5)
+#x10 = Spear(15)
+#x9.__str__()
+#x10.__str__()
 
-x11 = TwoHandedSword(5)
-x12 = TwoHandedSword(15)
-x11.__str__()
-x12.__str__()
+#x11 = TwoHandedSword(5)
+#x12 = TwoHandedSword(15)
+#x11.__str__()
+#x12.__str__()
 
-x13 = Sling(5)
-x14 = Sling(15)
-x13.__str__()
-x14.__str__()
+#x13 = Sling(5)
+#x14 = Sling(15)
+#x13.__str__()
+#x14.__str__()
 
-x15 = Wand(5)
-x15.__str__()
+#x15 = Wand(5)
+#x15.__str__()
+
+
+def give_starting_weapon_for_skill(_race, _skill):
+    result= ""
+    if _skill == "W_POLEARMS" :
+        if _race == "dwarf":
+            result = TwoHandedSword(randint(0,10))
+        elif _race == "hobbit":
+            result = Spear(randint(0,10))
+        else: 
+            if randint(0,10) > 4:
+                result = TwoHandedSword(randint(0,10))
+            else:
+                result = Spear(randint(0,10)) 
+    elif _skill == "W_CLASSIC":
+        result = ""
+        if _race == "dwarf":
+            result = Axe(randint(0,10))
+        elif _race == "hobbit" or _race == "elf":
+            result = Sword(randint(0,10))
+        else: 
+            if randint(0,10) > 4:
+                result = Sword(randint(0,10))
+            else:
+                result = Axe(randint(0,10))         
+    elif _skill =="W_SMALL"   :
+        result = Dagger(randint(0,10))  
+    elif _skill =="W_BOW"     :
+        result = Bow(randint(0,10))  
+    elif _skill =="W_SPECIAL" :
+        result = Sling(randint(0,10))  
+    elif _skill =="M_MAGIC"   :
+        result = Wand(randint(0,10))
+    return(result)
+
+def get_starting_weapon(_race, _heroclass, _skills):
+    w_skills =[(v,k) for  k, v in _skills.items()  if k in skill_list.WEAPON_SKILLS]
+    result = []
+    for skill in w_skills:
+        if skill[0]>2:
+            result.append(give_starting_weapon_for_skill(_race, skill[1]))
+    return(result)
+    
+##we need more than one skill!
+    #result = []
+    #skill_list = (list(_skills.items())) 
+    #print(list(_skills.items())) 
+    
+# FOR TESTS :
+example = get_starting_weapon("dwarf","ranger", {"W_SPECIAL":4,  "d":17, "b":17, "W_BOW":4})
+#print(type(example))
+#for exa in example:
+    #print(type(exa))
+    #print(exa)
+#print(example[0])
+print(example[1])
